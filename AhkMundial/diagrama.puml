@@ -1,0 +1,82 @@
+@startuml Diagrama
+
+class Calculadora{
+   probabilidadGanar(Participante)
+
+}
+
+class Sorteo{
+   Participantes = []
+   AgregarParticipantes()
+   CantidadParticipantesCategoria(Categoria)
+
+}
+
+class Participante{
+    nombre
+    apellido
+    dni
+    edad
+    institucion
+    mail
+    telefono
+    categoria
+    chances
+    referencia
+    fechaDeReferencia
+    referidos
+    medioPreferido
+    MateriasCursadas
+    
+    esReferido()
+}
+ 
+ class AlumnoAhk{
+    cantMateriasPromocionadas
+    cantMateriasAprobadas
+    notaAprobadas     
+ }
+
+class Referido{ 
+    referido
+    dni
+    mail
+    invitacion
+    fechaDeAceptacion
+
+    aceptarSolicitud()
+}
+
+class Categoria{
+    costo
+    refNecesarios
+    inscriptos
+
+    multiplicadorChances()
+}
+class Oro extends Categoria{
+ 
+}
+
+class Plata extends Categoria{
+    
+}
+
+class Bronce extends Categoria{
+    
+}
+
+
+
+
+Participante-->Referido
+Referido--> Participante
+Participante-->Categoria
+Participante-->InstitucionEducativa
+Participante-->AlumnoAhk
+Calculadora-->Participante
+Categoria-->Oro
+Categoria-->Plata
+Categoria-->Bronce
+Sorteo-->Participante
+@enduml
