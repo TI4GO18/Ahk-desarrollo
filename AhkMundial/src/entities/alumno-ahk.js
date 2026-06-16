@@ -1,19 +1,23 @@
 export class AlumnoAhk extends Participante{
-    
-    cantMateriasRegularizadas
-    cantMateriasAprobadas
-    notasAprobadas = []
-    
-    factorMateria = 0.5;
-
-    chances(){
-    let cant = 0;
-   cant += (factorMateria*cantMateriasRegularizadas);
-   notasAprobadas.forEach(nota=> cant+= (nota*factorMateria));
-  cant +=  this.referidos.filter(r=> r.participante.institucion === "AHK").length() * 2;
-  cant +=  this.referidos.filter(r=> r.participante.tecno).length();
-  cant += this.referidos.filter(r=> r.participante.institucion != "AHK" && r.participante.tecno === false).length();
-
-  return cant
-}
+  constructor(nombre, dni, email){
+    super(nombre, dni, email);
+    this.cantMateriasRegularizadas = 0;
+    this.cantMateriasAprobadas = 0;
+    this.notasAprobadas = [];
+    this.factorMateria = 0.5;
+   }
+    chancesPorReferidos(){
+     let cantRef = 0;
+     cantRef +=  this.referidos.filter(r=> r.participante.institucion === "AHK").length * 2;
+     cantRef +=  this.referidos.filter(r=> r.participante.esTecno).length();
+     cantRef += this.referidos.filter(r=> r.participante.institucion != "AHK" && r.participante.esTecno === false).length;
+      return cantRef
+    }
+    chancesPorMaterias(){
+     let cantMaterias = 0;
+     cantMaterias += (this.factorMateria*this.cantMateriasRegularizadas);
+     this.notasAprobadas.forEach(nota=> cantMaterias+= (nota*this.factorMateria));
+  
+      return cantMaterias 
+    }
 }
