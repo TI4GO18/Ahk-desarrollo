@@ -28,7 +28,10 @@ export class Participante{
     
 }
     invitarParticipante(nombre,dni,email){
-        const nombre = new Referido(nombre, dni, email, this);
+        const referido = new Referido(nombre, dni, email, this);
+        this.referidos.push(referido);     
+        
+        return ;
         
     }
     esReferido(){  
