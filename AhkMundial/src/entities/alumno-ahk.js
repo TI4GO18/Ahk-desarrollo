@@ -1,23 +1,22 @@
+import { Participante } from './participante.js';
+import { HistorialAcademico } from './historial-academico.js';
+
 export class AlumnoAhk extends Participante{
   constructor(nombre, dni, email){
-    super(nombre, dni, email);
-    this.cantMateriasRegularizadas = 0;
-    this.cantMateriasAprobadas = 0;
-    this.notasAprobadas = [];
-    this.factorMateria = 0.5;
+    super(nombre, dni, email, true);
+    this.historialAcademico = new HistorialAcademico();
    }
+
     chancesPorReferidos(){
+     const aceptados = this.referidos.filter(r => r.participante);
      let cantRef = 0;
-     cantRef +=  this.referidos.filter(r=> r.participante.institucion === "AHK").length * 2;
-     cantRef +=  this.referidos.filter(r=> r.participante.esTecno).length();
-     cantRef += this.referidos.filter(r=> r.participante.institucion != "AHK" && r.participante.esTecno === false).length;
+     cantRef += aceptados.filter(r => r.participante instanceof AlumnoAhk).length * 2;
+     cantRef += aceptados.filter(r => !(r.participante instanceof AlumnoAhk) && r.participante.esTecno).length * 1;
+     cantRef += aceptados.filter(r => !(r.participante instanceof AlumnoAhk) && !r.participante.esTecno).length * 0.5;
       return cantRef
     }
+
     chancesPorMaterias(){
-     let cantMaterias = 0;
-     cantMaterias += (this.factorMateria*this.cantMateriasRegularizadas);
-     this.notasAprobadas.forEach(nota=> cantMaterias+= (nota*this.factorMateria));
-  
-      return cantMaterias 
+      return this.historialAcademico.chancesPorMateriasCursadas() + this.historialAcademico.chancesPorMateriasAprobadas();
     }
 }

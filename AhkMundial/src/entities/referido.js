@@ -1,4 +1,8 @@
-export class Referido{ 
+import { Participante } from './participante.js';
+import { AlumnoAhk } from './alumno-ahk.js';
+import { NotifWhatsapp } from './notif-whatsapp.js';
+
+export class Referido{
     constructor(nombre, dni, email, referencia){
         this.nombre = nombre;
         this.dni = dni;
@@ -18,6 +22,9 @@ export class Referido{
     }
     else{
         this.participante = new Participante(this.nombre, this.dni, this.email, esTecno);
-    }   
-  
+    }
+
+    const notificacion = new NotifWhatsapp();
+    notificacion.enviar(this.referencia.email, `${this.nombre} acepto tu invitacion y ya es participante del sorteo`);
+  }
 }

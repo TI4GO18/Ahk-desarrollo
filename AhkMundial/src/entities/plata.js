@@ -1,3 +1,5 @@
+import { Categoria } from './categoria.js';
+
 export class Plata extends Categoria{
     
     costo

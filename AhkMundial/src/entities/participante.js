@@ -1,3 +1,5 @@
+import { Calculadora } from './calculadora.js';
+
 export class Participante{
     constructor(nombre, dni, email, esTecno){
         this.nombre = nombre;
@@ -21,21 +23,20 @@ export class Participante{
 
     
 
-    chances(){
-    let cant = 0
-    cant += this.referidos.length;
-    return cant
-    
-}
-    invitarParticipante(nombre,dni,email){
-        const referido = new Referido(nombre, dni, email, this);
-        this.referidos.push(referido);     
-        
-        return ;
-        
+    chancesPorReferidos(){
+        return this.referidos.filter(r => r.participante).length * 1;
     }
-    esReferido(){  
-    return this.referencia !== null
-  }
 
+    chancesPorMaterias(){
+        return 0;
+    }
+
+    esReferido(){
+        return this.referencia !== null
+    }
+
+    consultarProbabilidad(sorteo){
+        const calculadora = new Calculadora();
+        return calculadora.calcularProbabilidad(this, sorteo);
+    }
 }
