@@ -75,6 +75,15 @@ export class Sorteo{
         return participante;
     }
 
+    autoRegistrarParticipante(participante){
+        if(this.existeReferido(participante.dni, participante.email)){
+            console.log('Esa persona ya fue invitada como referido y esta pendiente de confirmacion');
+            return null;
+        }
+
+        return this.registrarParticipante(participante);
+    }
+
     chequearAscensos(){
         const ascendidos = [];
 

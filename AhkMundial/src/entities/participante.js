@@ -19,9 +19,13 @@ export class Participante{
     referidos = [];
     medioPreferido
     esTecno
-    
 
-    
+    completarDatos(apellido, edad, telefono, medioPreferido){
+        this.apellido = apellido;
+        this.edad = edad;
+        this.telefono = telefono;
+        this.medioPreferido = medioPreferido;
+    }
 
     chancesPorReferidos(){
         return this.referidos.filter(r => r.participante).length * 1;
