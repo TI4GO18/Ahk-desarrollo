@@ -24,7 +24,16 @@ export class Referido{
         this.participante = new Participante(this.nombre, this.dni, this.email, esTecno);
     }
 
+    this.notificarAceptacion();
+  }
+
+  notificarAceptacion(){
+    const apellido = this.participante.apellido ? ` ${this.participante.apellido}` : '';
+    const mensaje = `${this.nombre}${apellido} acepto tu invitacion`;
     const notificacion = new NotifEmail();
-    notificacion.enviar(this.referencia.email, `${this.nombre} acepto tu invitacion y ya es participante del sorteo`);
+
+    notificacion.enviar(this.referencia.email, mensaje).catch(error => {
+        console.log('No se pudo enviar la notificacion:', error);
+    });
   }
 }

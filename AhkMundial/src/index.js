@@ -5,7 +5,7 @@ import { AlumnoAhk } from './entities/alumno-ahk.js';
 const sorteo = new Sorteo();
 
 const participante = new Participante('Juan', '30111222', 'tiagq06@gmail.com', false);
-participante.completarDatos('Perez', 28, '1122334455', 'whatsapp');
+participante.completarDatos('Perez', 28, '1122334455', 'email');
 sorteo.autoRegistrarParticipante(participante);
 
 const alumno = new AlumnoAhk('Maria', '30222333', 'maria@mail.com');
@@ -20,7 +20,7 @@ const referido = sorteo.invitarReferido(participante, 'Pedro', '30333444', 'pedr
 sorteo.autoRegistrarParticipante(new Participante('Pedro', '30333444', 'pedro@mail.com', false));
 
 referido.aceptarInvitacion(false, true);
-referido.participante.completarDatos('Gomez', 22, '1155667788', 'whatsapp');
+referido.participante.completarDatos('Gomez', 22, '1155667788', 'email');
 sorteo.registrarParticipante(referido.participante);
 
 sorteo.chequearAscensos();
